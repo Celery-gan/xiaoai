@@ -34,7 +34,7 @@ export default {
 
 <style lang='scss'>
 .wraper {
-  height: 87vh;
+  height: 89vh;
   overflow-x: hidden;
 }
 </style>

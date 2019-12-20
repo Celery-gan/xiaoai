@@ -1,13 +1,19 @@
 <template>
+<!-- 主页 -->
   <div>
-   <homeone></homeone>
+   <homecounter></homecounter>
    <homebight></homebight>
+   <homebottom></homebottom>
   </div>
 </template>
 
 <script>
-import homeone from '../components/HomeChild/Homeone'
+// 引入计数器
+import homecounter from '../components/HomeChild/Homecounter'
+// 引入曲线图
 import homebight from '../components/HomeChild/Homebight'
+// 引入首页下方一排数据
+import homebottom from '../components/HomeChild/Homebottom'
 export default {
   data() {
     return {
@@ -15,8 +21,9 @@ export default {
     };
   },
   components: {
-    homeone,
+    homecounter,
     homebight,
+    homebottom
   },
   methods: {
   
@@ -31,7 +38,12 @@ export default {
 
 <style lang='scss'>
 .box-card {
-  margin: 8px 20px;
+  margin: 7px 8px;
   flex: 1;
+}
+.flexbtw {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
 </style>

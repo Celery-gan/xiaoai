@@ -29,7 +29,7 @@
               active-text-color="#ffd04b"
             >
               <el-menu-item index="/" @click="goto('/')">
-                <i class="el-icon-menu"></i>
+                <i class="el-icon-location"></i>
                 <span slot="title">首页</span>
               </el-menu-item>
               <el-menu-item index="/pagingtab" @click="goto('/pagingtab')">
@@ -101,7 +101,7 @@ export default {
       // 获取当前小时
       this.hours = this.$dayjs().hour();
       // 将时间修改为(YYYY年MM月DD日hh时mm分ss秒)模式
-      this.date = this.$dayjs(localStorage.getItem("date")).format(
+      this.date = this.$dayjs(sessionStorage.getItem('date')).format(
         "YYYY年MM月DD日hh时mm分ss秒"
       );
     },
@@ -153,7 +153,7 @@ export default {
   height: 728px;
 }
 .sidebar {
-  flex: 5;
+  flex: 6;
   padding-top: 20px;
 }
 </style>

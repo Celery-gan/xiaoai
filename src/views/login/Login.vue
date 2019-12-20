@@ -101,8 +101,9 @@ export default {
                 this.$message({ type: "success", message: res.message});
                 // 将用户名存在本地
                 localStorage.setItem("username", this.ruleForm.name);
-                localStorage.setItem('date',res.data[0].date);
-                // console.log(res.data[0].date);
+                // sessionStorage.setItem('date',res.data[0].date);
+                sessionStorage.setItem('date',this.$dayjs());
+                console.log(res.data[0].date);   
                 // 成功就跳转到主页;
                 this.$router.push("/");
               } else {

@@ -9,7 +9,9 @@ import service from "./http"
 import dayjs from "dayjs"
 import axios from 'axios'
 import VCharts from 'v-charts'
+import JsonExcel from 'vue-json-excel'
 
+Vue.component('downloadExcel', JsonExcel)
 Vue.use(VCharts)
 Vue.use(ElementUI)
 
