@@ -18,7 +18,7 @@ module.exports = {
                 // 修改了vue.config.js文件 一定要重启项目
                 // http://localhost:3000
                 // 接口的根路径就被代理成了/api
-                target: 'https://elm.cangdu.org',
+                target: 'http://localhost:3000',
                 changeOrigin: true,
                 pathRewrite: {
                     '^/api': ''

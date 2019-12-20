@@ -8,7 +8,9 @@ import 'element-ui/lib/theme-chalk/index.css'
 import service from "./http"
 import dayjs from "dayjs"
 import axios from 'axios'
+import VCharts from 'v-charts'
 
+Vue.use(VCharts)
 Vue.use(ElementUI)
 
 Vue.prototype.$axios = service

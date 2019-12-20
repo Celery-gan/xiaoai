@@ -1,18 +1,37 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+   <homeone></homeone>
+   <homebight></homebight>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
+import homeone from '../components/HomeChild/Homeone'
+import homebight from '../components/HomeChild/Homebight'
 export default {
-  name: 'home',
+  data() {
+    return {
+     
+    };
+  },
   components: {
-    HelloWorld
-  }
-}
+    homeone,
+    homebight,
+  },
+  methods: {
+  
+  },
+  mounted() {
+
+  },
+  watch: {},
+  computed: {}
+};
 </script>
+
+<style lang='scss'>
+.box-card {
+  margin: 8px 20px;
+  flex: 1;
+}
+</style>
