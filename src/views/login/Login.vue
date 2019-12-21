@@ -1,6 +1,7 @@
 <template>
   <div class="loginto">
     <el-card class="box-card">
+
       <div slot="header" class="login_title">
         <span>欢迎来到小甘后台管理平台</span>
       </div>
@@ -98,12 +99,15 @@ export default {
               console.log("res=>", res);
               if (res.message === "登录成功") {
                 // 注册成功弹框
-                this.$message({ type: "success", message: res.message});
+                this.$message({ type: "success", message: res.message });
                 // 将用户名存在本地
                 localStorage.setItem("username", this.ruleForm.name);
+                // 存储注册时间
                 // sessionStorage.setItem('date',res.data[0].date);
-                sessionStorage.setItem('date',this.$dayjs());
-                console.log(res.data[0].date);   
+                // 存储本次登录时间
+                // sessionStorage.setItem('date',this.$dayjs());
+                localStorage.setItem("date", this.$dayjs());
+                console.log(res.data[0].date);
                 // 成功就跳转到主页;
                 this.$router.push("/");
               } else {
@@ -116,7 +120,7 @@ export default {
               console.log(err);
             });
         } else {
-            // 弹框提示失败
+          // 弹框提示失败
           if (this.ruleForm.name === "") {
             this.$message({
               type: "error",
@@ -127,12 +131,12 @@ export default {
               type: "error",
               message: "请输入密码"
             });
-          }else if (this.ruleForm.code === '') {
+          } else if (this.ruleForm.code === "") {
             this.$message({
               type: "error",
               message: "请输入验证码"
             });
-          }else if (this.ruleForm.code.length < 6) {
+          } else if (this.ruleForm.code.length < 6) {
             this.$message({
               type: "error",
               message: "验证码应为4位"

@@ -10,10 +10,13 @@ import dayjs from "dayjs"
 import axios from 'axios'
 import VCharts from 'v-charts'
 import JsonExcel from 'vue-json-excel'
+import mavonEditor from 'mavon-editor'
+import 'mavon-editor/dist/css/index.css'
 
 Vue.component('downloadExcel', JsonExcel)
 Vue.use(VCharts)
 Vue.use(ElementUI)
+Vue.use(mavonEditor)
 
 Vue.prototype.$axios = service
 Vue.prototype.$dayjs = dayjs

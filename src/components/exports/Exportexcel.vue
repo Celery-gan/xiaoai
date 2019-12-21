@@ -2,12 +2,10 @@
   <div style='display:flex'>
     <!-- 导出 excel -->
     <download-excel class="export-excel-wrapper" :data="list(data1)" name="tabform.xls">
-      <!-- 上面可以自定义自己的样式，还可以引用其他组件button -->
       <el-button type="primary" size="small">导出xls</el-button>
     </download-excel>
      <!-- 导出 csv -->
     <download-excel class="export-excel-wrapper" :data="list(data1)" name="tabform.csv" type='csv'>
-      <!-- 上面可以自定义自己的样式，还可以引用其他组件button -->
       <el-button type="primary" size="small">导出csv</el-button>
     </download-excel>
   </div>
@@ -23,7 +21,7 @@ export default {
   },
   data() {
     return {
-      num1: 0
+      num1: 0,
     };
   },
   components: {},
@@ -31,7 +29,7 @@ export default {
     list(data1) {
       // 使用时页面内容循环体应为 v-for(item in divide(arr))
       // this.num1++;
-      // if (this.num1 === 500) {
+      // if (this.num1 >= 500) {
       //   this.num1 === 0;
       // }
       return data1.slice(0, 1);

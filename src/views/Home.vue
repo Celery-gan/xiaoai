@@ -46,4 +46,9 @@ export default {
   justify-content: space-between;
   flex-wrap: wrap;
 }
+.flexeve {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
 </style>

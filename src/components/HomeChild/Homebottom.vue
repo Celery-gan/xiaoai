@@ -2,9 +2,9 @@
   <div class="flexbtw">
     <el-card class="box-card orderinfo">
       <el-table :data="arr1">
-        <el-table-column prop="num" label="Order_No" width="360"></el-table-column>
-        <el-table-column prop="price" label="Price"></el-table-column>
-        <el-table-column prop="status" label="Status"></el-table-column>
+        <el-table-column prop="num" label="Order_No" width="360" align="center"></el-table-column>
+        <el-table-column prop="price" label="Price" align="center"></el-table-column>
+        <el-table-column prop="status" label="Status" align="center"></el-table-column>
       </el-table>
     </el-card>
     <el-card class="box-card todolist">
@@ -112,7 +112,7 @@ export default {
         .then(res => {
           this.arr1 = res.data;
           this.arr1.map(item => {
-            item.price = `￥${item.price}`
+            item.price = `￥${item.price}`;
             if (item.status === 1) {
               item.status = "success";
             } else if (item.status === 0) {

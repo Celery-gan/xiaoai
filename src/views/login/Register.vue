@@ -1,6 +1,9 @@
 <template>
   <div class="loginto">
     <el-card class="box-card">
+      <div class='welcome'>
+        <img src="../../assets/img/login.gif" />
+      </div>
       <div slot="header" class="login_title">
         <span>欢迎来到小甘后台管理平台</span>
       </div>
@@ -146,5 +149,9 @@ export default {
   display: flex;
   justify-content: center;
   font-size: 18px;
+}
+.welcome {
+  display: flex;
+  justify-content: center
 }
 </style>

@@ -2,8 +2,8 @@
   <div>
     <div class="common_top">
       <div class="common_title">
-        <!-- <span><el-avatar src='../../assets/img/logo.png'></el-avatar></span> -->
-        <span>欢迎来到小甘管理系统</span>
+        <!-- <div class="portrait"><img src='../../assets/img/pic.gif' width="30px"></div> -->
+        <div>欢迎来到小甘管理系统</div>
       </div>
       <div class="common_nav">
         <span>亲爱的{{name}}</span>
@@ -101,7 +101,7 @@ export default {
       // 获取当前小时
       this.hours = this.$dayjs().hour();
       // 将时间修改为(YYYY年MM月DD日hh时mm分ss秒)模式
-      this.date = this.$dayjs(sessionStorage.getItem('date')).format(
+      this.date = this.$dayjs(localStorage.getItem('date')).format(
         "YYYY年MM月DD日hh时mm分ss秒"
       );
     },
@@ -136,6 +136,8 @@ export default {
 .common_title {
   width: 40%;
   margin-left: 2%;
+  // display: flex;
+  // align-items: center
 }
 .common_nav {
   width: 33%;
