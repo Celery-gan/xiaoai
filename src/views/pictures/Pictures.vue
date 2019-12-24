@@ -20,15 +20,15 @@
       <div class="pic-title">支持裁剪</div>
       <div class="pic-sourse">vue-image-crop-upload</div>
       <div id="app">
-        <el-button  class="btn" @click="toggleShow" type="primary">上传文件</el-button>
+        <el-button class="btn" @click="toggleShow" type="primary">上传文件</el-button>
         <my-upload
           field="file"
           @crop-success="cropSuccess"
           @crop-upload-success="cropUploadSuccess"
           @crop-upload-fail="cropUploadFail"
           v-model="show"
-          :width="50"
-          :height="50"
+          :width="500"
+          :height="500"
           url="/api/upload"
           :params="params"
           :headers="headers"
@@ -65,7 +65,7 @@ export default {
     cropSuccess(imgDataUrl) {
       //  imgDataUrl其实就是图片的base64data码
       this.avatar = imgDataUrl;
-      console.log(imgDataUrl); //这里打印出来的是base64格式的资源
+      // console.log(imgDataUrl); //这里打印出来的是base64格式的资源
     }
   },
   components: {
@@ -82,7 +82,7 @@ export default {
      * [param] field
      */
     cropSuccess(imgDataUrl, field) {
-      console.log("-------- crop success --------");
+      // console.log("-------- crop success --------");
       this.imgDataUrl = imgDataUrl;
     },
     /**
@@ -92,9 +92,9 @@ export default {
      * [param] field
      */
     cropUploadSuccess(jsonData, field) {
-      console.log("-------- upload success --------");
-      console.log(jsonData);
-      console.log("field: " + field);
+      // console.log("-------- upload success --------");
+      // console.log(jsonData);
+      // console.log("field: " + field);
     },
     /**
      * upload fail
@@ -103,9 +103,9 @@ export default {
      * [param] field
      */
     cropUploadFail(status, field) {
-      console.log("-------- upload fail --------");
-      console.log(status);
-      console.log("field: " + field);
+      // console.log("-------- upload fail --------");
+      // console.log(status);
+      // console.log("field: " + field);
     }
   },
   mounted() {},

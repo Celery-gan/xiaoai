@@ -38,6 +38,7 @@
           <!-- 第三个页面信息后按钮为 还原 -->
           <div v-if="num1 === 3">
             <el-button type="warning" size="small" @click="haveread(item)">还原</el-button>
+            <el-button type="danger" size="small" @click="clear(item)">清除</el-button>
           </div>
         </div>
       </div>
@@ -136,12 +137,19 @@ export default {
       });
       this.update();
     },
-    // 事件 清空回收站 不用触发 直接使arr3为空 删除汇总数组数据
+    // 事件 清空回收站 不用触发 直接使arr3为空 删除总数组中flag=3的全部数据
     BinEmpty() {
       this.arr3 = [];
       this.news = this.news.filter(item => {
         return item.flag !== 3;
       });
+    },
+    // 事件 从回收站清除单个数据
+    clear(item) {
+      this.news = this.news.filter(item1 => {
+        return item1 !== item;
+      });
+      this.update();
     }
   },
   mounted() {
@@ -174,7 +182,7 @@ export default {
   text-align: center;
 }
 .laber-left {
-  width: 16vw;
+  width: 20vw;
 }
 .laber-btn {
   margin: 10px 0;

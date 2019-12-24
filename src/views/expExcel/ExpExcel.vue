@@ -25,13 +25,14 @@
         style="margin:10px"
         :data="tabform.slice(
         (this.currentPages - 1) * this.pagesizes,
-        this.currentPages * this.pagesizes
+        this.currentPages* this.pagesizes
       )"
         name="tabform.xls"
       >
         <el-button type="primary" size="small">导出xls</el-button>
       </download-excel>
       <!-- 导出 csv -->
+      <!-- :data 导出数据 为当前页的数据 -->
       <download-excel
         class="export-excel-wrapper"
         style="margin:10px"
@@ -75,11 +76,11 @@ export default {
     },
     pagesize(pagesize) {
       this.pagesizes = pagesize;
-      console.log(this.pagesizes);
+      // console.log(this.pagesizes);
     },
     currentPage(currentPage) {
       this.currentPages = currentPage;
-      console.log(this.currentPages);
+      // console.log(this.currentPages);
     }
   },
   mounted() {
@@ -91,4 +92,8 @@ export default {
 </script>
 
 <style scoped lang='scss'>
+.product-list {
+  margin: 8px auto;
+  width: 84vw;
+}
 </style>

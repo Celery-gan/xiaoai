@@ -51,9 +51,9 @@
       </el-form>
       <div slot="footer" class="dialog-footer">
         <!-- 取消按钮 -->
-        <el-button @click="cancel">取 消</el-button>
+        <el-button @click="cancel(obj1)">取 消</el-button>
         <!-- 确认按钮 -->
-        <el-button type="primary" @click="makesure">确 定</el-button>
+        <el-button type="primary" @click="makesure(obj1)">确 定</el-button>
       </div>
     </el-dialog>
   </div>
@@ -75,6 +75,7 @@ export default {
       dialogTableVisible: false,
       dialogFormVisible: false,
       obj1: {},
+      obj2: {},
       formLabelWidth: "80px"
     };
   },
@@ -118,11 +119,7 @@ export default {
     },
     // 删除表格数据
     del(index) {
-      this.tabform.splice(index, 1);
-      this.tabform.slice(
-        (this.currentPages - 1) * this.pagesizes,
-        this.currentPages * this.pagesizes
-      ).splice(index, 1);
+      this.tabform.splice(index + (this.currentPages - 1) * this.pagesizes, 1);
     },
     // 编辑表格数据
     edit(row) {
@@ -132,13 +129,24 @@ export default {
     },
     makesure() {
       this.dialogFormVisible = false;
-      this.$message({
-        message: "修改成功",
-        type: "success"
-      });
+      if (
+        this.obj1.NAME.trim() === "" ||
+        this.obj1.ORI_PRICE.trim() === "" ||
+        this.obj1.PRESENT_PRICE.trim() === ""
+      ) {
+        this.$message({
+          message: "修改信息不能为空",
+          type: "danger"
+        });
+      } else {
+        this.$message({
+          message: "修改成功",
+          type: "success"
+        });
+      }
     },
-    cancel(){
-       this.dialogFormVisible = false;
+    cancel() {
+      this.dialogFormVisible = false;
       this.$message({
         message: "取消修改",
         type: "info"

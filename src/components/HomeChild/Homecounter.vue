@@ -1,5 +1,5 @@
 <template>
-<!-- 计数器 -->
+  <!-- 计数器 -->
   <div>
     <div class="flex">
       <el-card class="box-card">
@@ -9,7 +9,10 @@
           </div>
           <div>
             <div class="box-classify">new visits</div>
-            <div>{{homedata.visits}}</div>
+            <!-- duration	持续时间，以毫秒为单位 -->
+            <!-- startVal	开始值    endVal	结束值 -->
+            <countTo :startVal='homedata.visits' :endVal='102500' :duration="300000"></countTo>
+            <!-- <div>{{homedata.visits}}</div> -->
           </div>
         </div>
       </el-card>
@@ -51,13 +54,16 @@
 </template>
 
 <script>
+import countTo from "vue-count-to";
 export default {
   data() {
     return {
-       homedata: {}
+      homedata: {}
     };
   },
-  components: {},
+  components: {
+    countTo
+  },
   methods: {
     gethomeData() {
       this.$axios

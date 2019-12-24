@@ -96,7 +96,7 @@ export default {
               code: this.ruleForm.code
             })
             .then(res => {
-              console.log("res=>", res);
+              // console.log("res=>", res);
               if (res.message === "登录成功") {
                 // 注册成功弹框
                 this.$message({ type: "success", message: res.message });
@@ -107,13 +107,13 @@ export default {
                 // 存储本次登录时间
                 // sessionStorage.setItem('date',this.$dayjs());
                 localStorage.setItem("date", this.$dayjs());
-                console.log(res.data[0].date);
+                // console.log(res.data[0].date);
                 // 成功就跳转到主页;
                 this.$router.push("/");
               } else {
                 // 其他情况弹框
                 this.$message({ type: "error", message: res.message });
-                this.$refs[formName].resetFields();
+                this.$refs[formName.code].resetFields();
               }
             })
             .catch(err => {
@@ -136,7 +136,7 @@ export default {
               type: "error",
               message: "请输入验证码"
             });
-          } else if (this.ruleForm.code.length < 6) {
+          } else if (this.ruleForm.code.length !== 4) {
             this.$message({
               type: "error",
               message: "验证码应为4位"

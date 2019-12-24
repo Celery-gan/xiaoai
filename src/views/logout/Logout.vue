@@ -23,10 +23,10 @@ export default {
           this.$axios
             .req("/user/logout")
             .then(res => {
-              console.log(res);
+              // console.log(res);
               this.$message({ type: "success", message: res.message });
               localStorage.removeItem("username");
-              sessionStorage.removeItem("date");
+              localStorage.removeItem("date");
               this.$router.push("/login");
             })
             .catch(err => {

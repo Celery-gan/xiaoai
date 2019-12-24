@@ -3,7 +3,7 @@
     <!-- 头部 -->
     <div class="public-top">
       <div>
-        <el-button type="danger" size="mini">查看</el-button>
+        <el-button type="danger" size="mini" @click="goback">返回</el-button>
         <el-button type="primary" size="mini" @click="submitForm('ruleForm')">发布</el-button>
       </div>
     </div>
@@ -52,7 +52,7 @@
         </el-form-item>
         <!-- 重要性 下拉菜单 -->
         <el-form-item label="重要性" prop="significances">
-          <el-select v-model="ruleForm.significances" placeholder="请选择" class="checks">
+          <el-select v-model="ruleForm.star" placeholder="请选择" class="checks">
             <el-option
               v-for="item in significa"
               :key="item.value"
@@ -66,7 +66,7 @@
           <div class="block">
             <!-- <span class="demonstration">带快捷选项</span> -->
             <el-date-picker
-              v-model="ruleForm.dates"
+              v-model="ruleForm.date"
               type="datetime"
               placeholder="选择日期时间"
               align="right"
@@ -76,11 +76,10 @@
         </el-form-item>
       </div>
       <div id="main">
-        <mavon-editor v-model="ruleForm.value" />
+        <mavon-editor v-model="ruleForm.text" />
       </div>
       <el-form-item class="public-submit">
         <el-button type="primary" @click="submitForm('ruleForm')">发布</el-button>
-        <el-button @click="resetForm('ruleForm')">重置</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -90,6 +89,7 @@
 export default {
   data() {
     return {
+      // 下拉菜单对应数组 8个
       categories: [
         { value: "React", label: "React" },
         { value: "Vue", label: "Vue" },
@@ -100,11 +100,13 @@ export default {
         { value: "工具类", label: "工具类" },
         { value: "其他", label: "其他" }
       ],
+      // 来源对应数组 3个
       sources: [
         { value: "原创", label: "原创" },
         { value: "转载", label: "转载" },
         { value: "与他人合作", label: "与他人合作" }
       ],
+      // 重要性对应数组 5个
       significa: [
         { value: "1", label: "1" },
         { value: "2", label: "2" },
@@ -112,6 +114,7 @@ export default {
         { value: "4", label: "4" },
         { value: "5", label: "5" }
       ],
+      // 日历选择器
       pickerOptions: {
         shortcuts: [
           {
@@ -139,14 +142,15 @@ export default {
         ]
       },
       ruleForm: {
+        _id: "",
         title: "",
         abstract: "",
         author: "",
         category: "",
         source: "",
-        significances: "",
-        dates: "",
-        value: ""
+        star: "",
+        date: "",
+        text: ""
       },
       rules: {
         title: [
@@ -157,87 +161,95 @@ export default {
           { required: true, message: "请选择文章摘要", trigger: "change" }
         ],
         author: [
-          { required: true, message: "请选择作者名字", trigger: "change" }
+          { required: true, message: "请选择文章摘要", trigger: "change" }
         ],
         category: [
-          { required: true, message: "请选择文章类目", trigger: "change" }
+          { required: true, message: "请选择文章摘要", trigger: "change" }
         ],
         source: [
-          { required: true, message: "请选择文章来源", trigger: "change" }
+          { required: true, message: "请选择文章摘要", trigger: "change" }
         ],
-        significances: [
-          { required: true, message: "请选择文章重要性", trigger: "change" }
-        ],
-        dates: [
-          { required: false }
-        ],
-        value: [
-          { required: false}
-        ]
+        star: [{ required: true, message: "请选择文章摘要", trigger: "change" }]
       }
     };
   },
   components: {},
   methods: {
+    // 返回前一页
+    goback() {
+      history.back();
+      // history.go(-1);
+    },
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
           // 当前时间的时间撮
           let time1 = this.$dayjs().valueOf();
           // 文章发布时间的时间撮
-          let time2 = this.$dayjs(this.ruleForm.dates).valueOf();
+          let time2 = this.$dayjs(this.ruleForm.date).valueOf();
+          // 如果发布时间的时间撮小于当前时间撮（发布时间先于当前时间）
           if (time1 >= time2) {
+            //  - 编辑文章: /article/update
+            // - post请求
+            //   - 参数:
+            //     id: 文章的id
+            //     title: 文章标题
+            //     abstract: 文章摘要
+            //     author: 作者
+            //     category: 类目
+            //     source: 来源
+            //     star: 重要性
+            //     text: 文章内容
+            //     date: 发布时间
             this.$axios
-              .req("/article/create", {
+              .req("/article/update", {
+                id: this.ruleForm._id,
                 title: this.ruleForm.title,
                 abstract: this.ruleForm.abstract,
                 author: this.ruleForm.author,
                 category: this.ruleForm.category,
                 source: this.ruleForm.source,
-                star: this.ruleForm.significances,
-                text: this.ruleForm.value,
-                date: this.ruleForm.dates
+                star: this.ruleForm.star,
+                text: this.ruleForm.text,
+                date: this.ruleForm.date
               })
               .then(res => {
-                if (res.code === 200) {
+                if (res.success === true) {
                   this.$message({
-                    message: "文章已成功发布",
+                    message: "文章修改成功",
                     type: "success"
                   });
-                  this.$router.push("/");
+                  // 修改成功 跳回已发布页
+                  this.$router.push("/beenpub");
                 } else {
                   this.$message({
                     message: res.message.message,
-                    type: "success"
+                    type: "danger"
                   });
                 }
-                // console.log(res);
               })
               .catch(err => {
                 console.log(err);
               });
-          } else {
+          }
+          // 如果发布时间的时间撮大于当前时间撮（发布时间在当前时间之后）
+          else {
             this.$message({
               message: "非法时间",
               type: "success"
             });
           }
         } else {
-          // console.log("error submit!!");
-          this.$message({
-            message: "error submit!!",
-            type: "success"
-          });
+          console.log("error submit!!");
           return false;
         }
       });
-    },
-    resetForm(formName) {
-      this.$refs[formName].resetFields();
-      // console.log(1);
     }
   },
-  mounted() {},
+  mounted() {
+    //  接受 已发布 对应点击时间传过来的数组信息
+    this.ruleForm = this.$route.query.row;
+  },
   watch: {},
   computed: {}
 };
